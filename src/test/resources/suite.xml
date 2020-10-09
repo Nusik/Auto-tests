@@ -1,0 +1,11 @@
+<?xml version = "1.0" encoding = "UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+<suite name="Smoke suite" configfailurepolicy="continue" >
+  <parameter name="one" value="Test two parameter"/>
+  <test name="Main test">
+    <classes>
+      <class name="TestNgDemoTest.CalculatorTest"/>
+      <class name="TestNgDemoTest.StringWorkerTest"/>
+    </classes>
+  </test>
+</suite>
