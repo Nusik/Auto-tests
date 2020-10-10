@@ -25,7 +25,6 @@ public class DemoGuruLoginTest extends BaseUiTest{
 
     @Test
     public void positiveLoginTest() {
-
         driver.findElement(By.name("uid")).sendKeys(login);
         driver.findElement(By.name("password")).sendKeys(password);
         driver.findElement(By.xpath("//input[@name='btnLogin']")).click();
@@ -40,7 +39,6 @@ public class DemoGuruLoginTest extends BaseUiTest{
 
     @Test
     public void negativeWrongPasswordLoginTest() {
-
         driver.findElement(By.name("uid")).sendKeys(login);
         driver.findElement(By.name("password")).sendKeys("12345");
         driver.findElement(By.xpath("//input[@name='btnLogin']")).click();
@@ -50,5 +48,51 @@ public class DemoGuruLoginTest extends BaseUiTest{
         assertEquals(driver.getCurrentUrl(), loginUrl);
     }
 
+    @Test
+    public void negativeWrongLoginLoginTest() {
+        driver.findElement(By.name("uid")).sendKeys("guru");
+        driver.findElement(By.name("password")).sendKeys(password);
+        driver.findElement(By.xpath("//input[@name='btnLogin']")).click();
 
+        assertEquals(driver.switchTo().alert().getText(), "User or Password is not valid");
+        driver.switchTo().alert().accept();
+        assertEquals(driver.getCurrentUrl(), loginUrl);
+    }
+
+    @Test
+    public void negativeWrongLoginPasswordLoginTest() {
+        driver.findElement(By.name("uid")).sendKeys("guru");
+        driver.findElement(By.name("password")).sendKeys(" ");
+        driver.findElement(By.xpath("//input[@name='btnLogin']")).click();
+
+        assertEquals(driver.switchTo().alert().getText(), "User or Password is not valid");
+        driver.switchTo().alert().accept();
+        assertEquals(driver.getCurrentUrl(), loginUrl);
+    }
+
+    @Test
+    public void negativeEmptyFieldsLoginTest() {
+        driver.findElement(By.name("btnLogin")).click();
+        assertEquals(driver.switchTo().alert().getText(), "User or Password is not valid");
+        driver.switchTo().alert().accept();
+        assertEquals(driver.getCurrentUrl(), loginUrl);
+    }
+
+    @Test
+    public void negativeEmptyLoginFieldLoginTest() {
+        driver.findElement(By.name("password")).sendKeys(password);
+        driver.findElement(By.name("btnLogin")).click();
+        assertEquals(driver.switchTo().alert().getText(), "User or Password is not valid");
+        driver.switchTo().alert().accept();
+        assertEquals(driver.getCurrentUrl(), loginUrl);
+    }
+
+    @Test
+    public void negativeEmptyPasswordFieldLoginTest() {
+        driver.findElement(By.name("uid")).sendKeys(login);
+        driver.findElement(By.name("btnLogin")).click();
+        assertEquals(driver.switchTo().alert().getText(), "User or Password is not valid");
+        driver.switchTo().alert().accept();
+        assertEquals(driver.getCurrentUrl(), loginUrl);
+    }
 }
