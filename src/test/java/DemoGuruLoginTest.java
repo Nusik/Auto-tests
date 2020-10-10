@@ -1,18 +1,12 @@
-import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.support.ui.WebDriverWait;
-import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.Test;
 
 import static org.openqa.selenium.support.ui.ExpectedConditions.presenceOfElementLocated;
 import static org.testng.Assert.assertEquals;
 
-public class DemoGuruLoginTest extends BaseUiTest{
+public class DemoGuruLoginTest extends BaseUiTest {
 
     String loginUrl = "http://demo.guru99.com/Agile_Project/Agi_V1/index.php";
     String login = "1303";
@@ -82,6 +76,7 @@ public class DemoGuruLoginTest extends BaseUiTest{
     public void negativeEmptyLoginFieldLoginTest() {
         driver.findElement(By.name("password")).sendKeys(password);
         driver.findElement(By.name("btnLogin")).click();
+
         assertEquals(driver.switchTo().alert().getText(), "User or Password is not valid");
         driver.switchTo().alert().accept();
         assertEquals(driver.getCurrentUrl(), loginUrl);
@@ -91,8 +86,20 @@ public class DemoGuruLoginTest extends BaseUiTest{
     public void negativeEmptyPasswordFieldLoginTest() {
         driver.findElement(By.name("uid")).sendKeys(login);
         driver.findElement(By.name("btnLogin")).click();
+
         assertEquals(driver.switchTo().alert().getText(), "User or Password is not valid");
         driver.switchTo().alert().accept();
         assertEquals(driver.getCurrentUrl(), loginUrl);
+    }
+
+    @Test
+    public void negativeWordingUnderEmptyFieldsLoginTest() throws InterruptedException {
+        driver.findElement(By.name("uid")).sendKeys(" ");
+        driver.findElement(By.name("uid")).clear();
+        driver.findElement(By.name("password")).sendKeys(" ");
+        driver.findElement(By.name("password")).clear();
+
+        assertEquals(driver.findElement(By.xpath("//label[@id='message23']")).getText(), "User-ID must not be blank");
+        assertEquals(driver.findElement(By.xpath("//label[@id='message18']")).getText(), "Password must not be blank");
     }
 }
