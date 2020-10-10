@@ -41,7 +41,7 @@ public class GoogleSearchResultInListTest extends BaseUiTest {
                 } else {
                     System.out.println(siteName.toUpperCase() + " found on page " + i);
                 }
-                System.out.println(siteName.toUpperCase() + " not found on page " + i);  //как указать номер страницы? какой цикл нужен?
+                System.out.println(siteName.toUpperCase() + " not found on page " + i);  //как указать номер страницы? какой цикл нужен, чтоб искать на каждой странице?
 
             } else {
                 System.out.println(siteName.toUpperCase() + " found on page " + i);
@@ -49,25 +49,3 @@ public class GoogleSearchResultInListTest extends BaseUiTest {
         }
     }
 }
-
-//for (int i = 1; i <= numberOfPages; i = i + 1) {
-//        for (int i = 1; i <= links.size(); i = i + 1) {
-//            for (int j = 1; j <= links.size(); j = j + 1) {
-//                String list = links.get(i).getText();
-//                System.out.println(list);
-
-//driver.findElement(By.xpath("//span[text()='Next']")).click();
-//        if (list.contains("stylus.ua"))
-//            {
-//                System.out.println("STYLUS.UA found on " + " page");
-//                driver.findElements(By.xpath("//cite[text()='stylus.ua']"));
-//            } else {
-//                System.out.println("STYLUS.UA not found on first 5 pages");
-//            }
-
-
-//       driver.findElement(By.xpath("//*[contains(text(), 'Ukraine')]"));
-//       driver.findElement(By.name("btnK")).click();
-
-//        List<WebElement> link = wait.until(presenceOfElementLocated(By.cssSelector("#result-stats")));
-//      assertTrue(link.get() getText().contains("About"));
