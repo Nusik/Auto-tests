@@ -50,7 +50,6 @@ public class GoogleSearchResultInListTest extends BaseUiTest {
         List<WebElement> allLinks = driver.findElements(By.tagName("a"));
         for (WebElement element : allLinks) {
             String sites = element.getAttribute("href");
-            System.out.println(sites);
         }
         while (count <= 5) {
             if (allLinks.size() != 0 && allLinks.contains("stylus.ua")) {
