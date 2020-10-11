@@ -61,12 +61,12 @@ public class GoogleSearchResultInListTest extends BaseUiTest {
                 List<WebElement> Links = driver.findElements(By.tagName("cite"));
                 for (WebElement element : Links) {
                     String sites = element.getAttribute("stylus.ua");
-                    System.out.println("STYLUS.UA found on " + count + " page");
                 }
-                if (Links.size() != 0 && Links.contains("stylus.ua")) {
+                if (Links.size() != 0 && !Links.contains("stylus.ua")) {
                     System.out.println("STYLUS.UA found on " + count + " page");
+                } else {
+                    System.out.println("STYLUS.UA not found on first 5 pages");
                 }
-                System.out.println("STYLUS.UA not found on first 5 pages");
             }
             break;
         }
