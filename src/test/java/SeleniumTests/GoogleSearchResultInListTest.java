@@ -1,3 +1,5 @@
+package SeleniumTests;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
@@ -18,32 +20,8 @@ public class GoogleSearchResultInListTest extends BaseUiTest {
         driver.get(url);
     }
 
-    @Test //works only when result in 1st page
-    public void searchLinkInResultTest() {
-        int count = 1;
-        driver.findElement(By.name("q")).sendKeys("iphone kyiv buy" + Keys.ENTER);
-
-        WebElement link = driver.findElement(By.partialLinkText("stylus.ua"));
-
-        if (link.isDisplayed()) {
-            System.out.println("STYLUS.UA found on " + count + " page");
-        } else {
-            while (count <= 5) {
-                driver.findElement(cssSelector("#pnnext")).click();
-                WebElement link1 = wait.until(presenceOfElementLocated(By.partialLinkText("stylus.ua")));
-                count++;
-                if (link.isDisplayed()) {
-                    System.out.println("STYLUS.UA found on " + count + " page");
-                } else {
-                    return;
-                }
-            }
-            System.out.println("STYLUS.UA not found on first 5 pages");
-        }
-    }
-
     @Test
-    public void searchSite2() {
+    public void searchLinkInResultTest() {
         int count = 1;
         driver.findElement(By.name("q")).sendKeys("iphone kyiv buy" + Keys.ENTER);
 
@@ -68,6 +46,30 @@ public class GoogleSearchResultInListTest extends BaseUiTest {
                 }
             }
             break;
+        }
+    }
+
+    @Test //works only when result in 1st page
+    public void searchLinkInPageTest() {
+        int count = 1;
+        driver.findElement(By.name("q")).sendKeys("iphone kyiv buy" + Keys.ENTER);
+
+        WebElement link = driver.findElement(By.partialLinkText("stylus.ua"));
+
+        if (link.isDisplayed()) {
+            System.out.println("STYLUS.UA found on " + count + " page");
+        } else {
+            while (count <= 5) {
+                driver.findElement(cssSelector("#pnnext")).click();
+                WebElement link1 = wait.until(presenceOfElementLocated(By.partialLinkText("stylus.ua")));
+                count++;
+                if (link.isDisplayed()) {
+                    System.out.println("STYLUS.UA found on " + count + " page");
+                } else {
+                    return;
+                }
+            }
+            System.out.println("STYLUS.UA not found on first 5 pages");
         }
     }
 }

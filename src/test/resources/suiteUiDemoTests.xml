@@ -4,9 +4,9 @@
     <parameter name="one" value="Test two parameter"/>
     <test name="Main test">
         <classes>
-            <class name="DemoGuruLoginTest"/>
-            <class name="GoogleSearchTest"/>
-            <class name="GoogleSearchResultInListTest"/>
+            <class name="SeleniumTests.DemoGuruLoginTest"/>
+            <class name="SeleniumTests.GoogleSearchTest"/>
+            <class name="SeleniumTests.GoogleSearchResultInListTest"/>
         </classes>
     </test>
 </suite>
