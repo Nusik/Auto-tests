@@ -14,6 +14,9 @@ import static org.openqa.selenium.support.ui.ExpectedConditions.presenceOfElemen
 public class GoogleSearchResultInListTest extends BaseUiTest {
 
     String url = "https://google.com/ncr";
+    String textForSearchResult = "iphone kyiv buy";
+    String expectedText = "stylus.ua";
+    int maxPageNumber = 5;
 
     @BeforeMethod
     public void navigateToUrl() {
@@ -21,31 +24,24 @@ public class GoogleSearchResultInListTest extends BaseUiTest {
     }
 
     @Test
-    public void searchLinkInResultTest() {
-        int count = 1;
-        driver.findElement(By.name("q")).sendKeys("iphone kyiv buy" + Keys.ENTER);
+    public void searchLinkInResultCorrectTest() {
+        driver.findElement(By.name("q")).sendKeys(textForSearchResult + Keys.ENTER);
+        WebElement stats = wait.until(presenceOfElementLocated(By.cssSelector("#result-stats")));
 
-        List<WebElement> allLinks = driver.findElements(By.tagName("a"));
-        for (WebElement element : allLinks) {
-            String sites = element.getAttribute("href");
-        }
-        while (count <= 5) {
-            if (allLinks.size() != 0 && allLinks.contains("stylus.ua")) {
-                System.out.println("STYLUS.UA found on " + count + " page");
-            } else {
-                driver.findElement(cssSelector("#pnnext")).click();
-                count++;
-                List<WebElement> Links = driver.findElements(By.tagName("cite"));
-                for (WebElement element : Links) {
-                    String sites = element.getAttribute("stylus.ua");
-                }
-                if (Links.size() != 0 && !Links.contains("stylus.ua")) {
-                    System.out.println("STYLUS.UA found on " + count + " page");
-                } else {
-                    System.out.println("STYLUS.UA not found on first 5 pages");
+        aa:
+        for (int i = 1; i <= maxPageNumber; i++) {
+            List<WebElement> searchResults = driver.findElements(By.cssSelector("div cite"));
+            bb:
+            for (WebElement element : searchResults) {
+                if (element.getText().contains(expectedText)) {
+                    System.out.println("[" + expectedText + "] was found on page " + i);
+                    break aa;
                 }
             }
-            break;
+            driver.findElement(cssSelector("#pnnext")).click();
+            if (maxPageNumber == i) {
+                System.out.println("[" + expectedText + "] was not found on " + i + " pages");
+            }
         }
     }
 }
