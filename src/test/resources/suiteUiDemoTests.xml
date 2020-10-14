@@ -7,6 +7,9 @@
             <class name="SeleniumTests.DemoGuruLoginTest"/>
             <class name="SeleniumTests.GoogleSearchTest"/>
             <class name="SeleniumTests.GoogleSearchResultInListTest"/>
+            <class name="rozetka.ComparisonOfMonitors"/>
+            <class name="rozetka.RozetkaBusketTest"/>
+            <class name="rozetka.SearchMobilePhoneByFilters"/>
         </classes>
     </test>
 </suite>
