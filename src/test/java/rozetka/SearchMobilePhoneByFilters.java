@@ -12,6 +12,7 @@ import java.util.List;
 import static org.openqa.selenium.support.ui.ExpectedConditions.presenceOfElementLocated;
 
 public class SearchMobilePhoneByFilters extends BaseTestRozetka {
+
     String url = "https://rozetka.com.ua/";
     String searchText = "samsung";
 

@@ -52,7 +52,6 @@ public class ComparisonOfMonitors extends BaseTestRozetka {
                 By monitorSelect = By.cssSelector("a.goods-tile__picture");
                 wait.until(presenceOfElementLocated(monitorSelect));
                 driver.findElement(monitorSelect).click();
-
             }
         }
     }
