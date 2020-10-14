@@ -44,6 +44,7 @@ public class RozetkaBusketTest extends BaseTestRozetka {
         assertEquals(basketIcon.getText(), 1);
     }
 
+
     private void scrollToElement(WebElement element) {
         ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", element);
         try {
