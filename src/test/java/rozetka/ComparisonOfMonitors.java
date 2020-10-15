@@ -11,6 +11,8 @@ import org.testng.annotations.Test;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 import static org.openqa.selenium.support.ui.ExpectedConditions.presenceOfElementLocated;
 import static org.testng.Assert.assertEquals;
@@ -25,7 +27,7 @@ public class ComparisonOfMonitors extends BaseTestRozetka {
     }
 
     @Test
-    public void comparisonOfMonitorsTest() {
+    public void comparisonOfMonitorsTest() throws InterruptedException {
         driver.manage().window().maximize();
         Actions action = new Actions(driver);
 
@@ -36,38 +38,52 @@ public class ComparisonOfMonitors extends BaseTestRozetka {
         By monitorElement = By.xpath("//a[@class='menu__link'][contains(@href,'monitors/c80089')][contains(text(),'Мониторы')]");
         wait.until(presenceOfElementLocated(monitorElement));
         WebElement selectElement = driver.findElement(monitorElement);
+        Thread.sleep(7000);
         selectElement.click();
 
-        wait.until(presenceOfElementLocated(By.cssSelector("div.goods-tile__prices")));
+
 //        System.out.println(driver.findElements(By.xpath("//*[contains(@class,'goods-tile__price-value')]")).size());
 //        assertEquals(driver.findElements(By.xpath("//*[contains(@class,'goods-tile__price-value')]")).size(), 60);
-        scrollToElement(driver.findElement(By.xpath("//button//span[contains(@class='sidebar-block__toggle-title')][contains(text(),'Цена']")));
+//   scrollToElement(driver.findElement(By.cssSelector("button.sidebar-block__toggle > span.sidebar-block__toggle-title  span[text='Цена']")));
 
-        WebElement enterMaxPrice = driver.findElement(By.xpath("//aside//div//input[contains(@class='slider-filter__input')][@formcontrolname='max']"));
-        enterMaxPrice.sendKeys("3000");
-        WebElement pressOkPrice = driver.findElement(By.xpath("//aside//div//button[contains(@class='button_size_small')][@type='submit']"));
-        pressOkPrice.click();
+
+//        scrollToElement(driver.findElement(By.xpath("//*[contains(@class='sidebar-block__toggle-title')][contains(text(),'Цена']")));
+//        WebElement enterMaxPrice = driver.findElement(By.xpath("//*[contains(@class='slider-filter__input')][@formcontrolname='max']"));
+//        enterMaxPrice.sendKeys("3000");
+//        WebElement pressOkPrice = driver.findElement(By.xpath("//aside//div//button[contains(@class='button_size_small')][@type='submit']"));
+//        pressOkPrice.click();
+//        wait.until(presenceOfElementLocated(By.cssSelector("div.goods-tile__prices")));
+
         wait.until(presenceOfElementLocated(By.cssSelector("div.goods-tile__prices")));
+        List<WebElement> monitorPrice = driver.findElements(By.xpath("//*[contains(@class,'goods-tile__price-value')]"));
+        WebElement monitorLessPrice = monitorPrice
+                .stream()
+                .filter(e -> Integer.parseInt(e.getText().replaceAll("[^0-9]", "")) < 3000)
+                .findFirst()
+                .get();
 
-
-
-//        List<WebElement> monitorPrice = driver.findElements(By.xpath("//*[contains(@class,'goods-tile__price-value')]"));
-//        List<String> prices = new ArrayList<>();
-//        for (WebElement element : monitorPrice) {
-//            prices.add(element.getText());
-//            String priceString = String.valueOf(prices.add(element.getText())).replace("[^0-9]", "");
-//            int priceInt = Integer.parseInt(priceString);
-//            if (priceInt < 3000) {
-//                prices.stream().sorted()
-//                        .filter(e -> priceInt < 3000)
-//                        .findFirst();
-//                System.out.println(prices);
-//
-//
-//            } else {
-//                System.out.println("No monitors with price < 3000");
-//            }
+        List<Integer> prices = new ArrayList<>();
+        for (WebElement element : monitorPrice) {
+            prices.add(Integer.parseInt(element.getText().replaceAll("[^0-9]", "")));
         }
+        int num = IntStream
+                .range(0, prices.size())
+                .filter(e -> e < 3000)
+                .findFirst()
+                .getAsInt();
+
+        Integer[] arr = prices.toArray()[];
+        ArrayList<Integer> in = IntStream
+                .range(0, prices.toArray().length)
+                .filter(e -> e < 3000)
+                .mapToObj(index -> index + ":" + prices[index])
+                .collect(Collectors.toList());
+
+        monitorLessPrice.findElement(By.xpath("(//*[@class='goods-tile__picture'])[" + num + "]")).click();
+
+
+    }
+
 
     private void scrollToElement(WebElement element) {
         ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", element);
@@ -77,7 +93,6 @@ public class ComparisonOfMonitors extends BaseTestRozetka {
             e.printStackTrace();
         }
     }
-
 
 }
 
