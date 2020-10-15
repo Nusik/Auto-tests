@@ -1,6 +1,7 @@
 package rozetka;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.testng.annotations.BeforeMethod;
@@ -26,17 +27,23 @@ public class SearchMobilePhoneByFilters extends BaseTestRozetka {
         driver.manage().window().maximize();
         driver.findElement(By.name("search")).sendKeys(searchText + Keys.ENTER);
 
-        //By mobilesLink = By.xpath("//a[contains(@class='categories-filter__link'][text(),'Мобильные телефоны']");
-        By mobilesLink = By.cssSelector("categories-filter__link-title");
+        By mobilesLink = By.xpath("//a[@class='categories-filter__link'][contains(@href,'mobile-phones/c80003/producer=samsung')]//span[contains(text(),'Мобильные телефоны')]");
         wait.until(presenceOfElementLocated(mobilesLink));
-        driver.findElement(mobilesLink).click();
+        WebElement selectMobileLink = driver.findElement(mobilesLink);
+        selectMobileLink.click();
 
-        wait.until(presenceOfElementLocated(By.cssSelector("a.goods-tile__picture")));
         wait.until(presenceOfElementLocated(By.xpath("//div[@class='sidebar-block__inner']")));
-        WebElement tickApple = driver.findElement(By.xpath("//input[@id='Apple']"));
-        tickApple.click();
-        WebElement tickHonor = driver.findElement(By.xpath("//input[@id='Honor']"));
-        tickHonor.click();
+        scrollToElement(driver.findElement(By.className("sidebar-alphabet")));
+        wait.until(presenceOfElementLocated(By.className("custom-checkbox")));
+
+        WebElement tickApple = driver.findElement(By.xpath("//a[contains(@label,'Apple')]"));
+        if (!tickApple.isSelected()) {
+            tickApple.click();
+        }
+        WebElement tickHonor = driver.findElement(By.id("Honor"));
+        if (!tickHonor.isSelected()) {
+            tickHonor.click();
+        }
 
         List<WebElement> phoneNames = driver.findElements(By.xpath("//*[contains(@class,'goods-tile__price-value')]"));
         List<String> namesList = new ArrayList<>();
@@ -47,6 +54,15 @@ public class SearchMobilePhoneByFilters extends BaseTestRozetka {
             else {
                 System.out.println("No mobile phones on the page with manufacturer: Samsung, Apple, Honor");
             }
+        }
+    }
+
+    private void scrollToElement(WebElement element) {
+        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", element);
+        try {
+            Thread.sleep(500);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
         }
     }
 }

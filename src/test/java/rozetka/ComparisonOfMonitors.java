@@ -3,6 +3,7 @@ package rozetka;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.interactions.SourceType;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
@@ -44,15 +45,19 @@ public class ComparisonOfMonitors extends BaseTestRozetka {
         List<String> prices = new ArrayList<>();
         for (WebElement element : monitorPrice) {
             prices.add(element.getText());
+            String priceString = String.valueOf(prices.add(element.getText())).replace("[^0-9]", "");
+            int priceInt = Integer.parseInt(priceString);
+            if (priceInt < 3000) {
+                prices.stream().sorted()
+                        .filter(e -> priceInt < 3000)
+                        .findFirst();
+                System.out.println(prices);
 
-            List<String> sortedPrices = new ArrayList<>(prices);
-            Collections.replaceAll(sortedPrices, "&nbsp;", "");
-            Collections.sort(sortedPrices);
-            if (sortedPrices.contains("2999")) {
-                By monitorSelect = By.cssSelector("a.goods-tile__picture");
-                wait.until(presenceOfElementLocated(monitorSelect));
-                driver.findElement(monitorSelect).click();
+
+            } else {
+                System.out.println("No monitors with price < 3000");
             }
         }
     }
 }
+
