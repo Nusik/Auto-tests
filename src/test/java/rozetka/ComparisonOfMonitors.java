@@ -1,6 +1,7 @@
 package rozetka;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.interactions.SourceType;
@@ -38,26 +39,46 @@ public class ComparisonOfMonitors extends BaseTestRozetka {
         selectElement.click();
 
         wait.until(presenceOfElementLocated(By.cssSelector("div.goods-tile__prices")));
-        System.out.println(driver.findElements(By.xpath("//*[contains(@class,'goods-tile__price-value')]")).size());
-        assertEquals(driver.findElements(By.xpath("//*[contains(@class,'goods-tile__price-value')]")).size(), 60);
+//        System.out.println(driver.findElements(By.xpath("//*[contains(@class,'goods-tile__price-value')]")).size());
+//        assertEquals(driver.findElements(By.xpath("//*[contains(@class,'goods-tile__price-value')]")).size(), 60);
+        scrollToElement(driver.findElement(By.xpath("//button//span[contains(@class='sidebar-block__toggle-title')][contains(text(),'Цена']")));
 
-        List<WebElement> monitorPrice = driver.findElements(By.xpath("//*[contains(@class,'goods-tile__price-value')]"));
-        List<String> prices = new ArrayList<>();
-        for (WebElement element : monitorPrice) {
-            prices.add(element.getText());
-            String priceString = String.valueOf(prices.add(element.getText())).replace("[^0-9]", "");
-            int priceInt = Integer.parseInt(priceString);
-            if (priceInt < 3000) {
-                prices.stream().sorted()
-                        .filter(e -> priceInt < 3000)
-                        .findFirst();
-                System.out.println(prices);
+        WebElement enterMaxPrice = driver.findElement(By.xpath("//aside//div//input[contains(@class='slider-filter__input')][@formcontrolname='max']"));
+        enterMaxPrice.sendKeys("3000");
+        WebElement pressOkPrice = driver.findElement(By.xpath("//aside//div//button[contains(@class='button_size_small')][@type='submit']"));
+        pressOkPrice.click();
+        wait.until(presenceOfElementLocated(By.cssSelector("div.goods-tile__prices")));
 
 
-            } else {
-                System.out.println("No monitors with price < 3000");
-            }
+
+//        List<WebElement> monitorPrice = driver.findElements(By.xpath("//*[contains(@class,'goods-tile__price-value')]"));
+//        List<String> prices = new ArrayList<>();
+//        for (WebElement element : monitorPrice) {
+//            prices.add(element.getText());
+//            String priceString = String.valueOf(prices.add(element.getText())).replace("[^0-9]", "");
+//            int priceInt = Integer.parseInt(priceString);
+//            if (priceInt < 3000) {
+//                prices.stream().sorted()
+//                        .filter(e -> priceInt < 3000)
+//                        .findFirst();
+//                System.out.println(prices);
+//
+//
+//            } else {
+//                System.out.println("No monitors with price < 3000");
+//            }
+        }
+
+    private void scrollToElement(WebElement element) {
+        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", element);
+        try {
+            Thread.sleep(500);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
         }
     }
+
+
 }
+
 

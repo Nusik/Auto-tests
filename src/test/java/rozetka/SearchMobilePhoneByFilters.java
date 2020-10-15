@@ -36,7 +36,7 @@ public class SearchMobilePhoneByFilters extends BaseTestRozetka {
         scrollToElement(driver.findElement(By.className("sidebar-alphabet")));
         wait.until(presenceOfElementLocated(By.className("custom-checkbox")));
 
-        WebElement tickApple = driver.findElement(By.xpath("//a[contains(@label,'Apple')]"));
+        WebElement tickApple = driver.findElement(By.xpath("//a[@label[contains('Apple')]]"));
         if (!tickApple.isSelected()) {
             tickApple.click();
         }
