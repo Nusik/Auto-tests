@@ -17,6 +17,7 @@ public class BaseTestRozetka {
         WebDriverManager.chromedriver().setup();
         driver = new ChromeDriver();
         wait = new WebDriverWait(driver, 10);
+        driver.manage().window().maximize();
     }
 
     @AfterClass
