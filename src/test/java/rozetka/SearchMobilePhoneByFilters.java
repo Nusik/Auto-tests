@@ -40,19 +40,16 @@ public class SearchMobilePhoneByFilters extends BaseTestRozetka {
         wait.until(presenceOfElementLocated(By.xpath("//label[@for='Honor']"))).click();
         Thread.sleep(3000);
 
-        try {
-            List<WebElement> phoneNames = driver.findElements(By.xpath("//*[contains(@class,'goods-tile__price-value')]"));
-            for (WebElement element : phoneNames) {
-                String phoneNamesList = element.getText();
-                Thread.sleep(3000);
-                assertTrue(phoneNamesList.contains("Samsung"));
-                assertTrue(phoneNamesList.contains("Apple"));
-                assertTrue(phoneNamesList.contains("Honor"));
+        List<WebElement> phoneNames = driver.findElements(By.cssSelector("span.goods-tile__title"));
+        for (WebElement element : phoneNames) {
+            String phoneTitle = element.getText();
+            if (phoneTitle.contains("Samsung") || phoneTitle.contains("Apple") || phoneTitle.contains("Honor")) {
+                assertTrue(element.getText().contains("Samsung"));
+                assertTrue(element.getText().contains("Apple"));
+                assertTrue(element.getText().contains("Honor"));
             }
-            System.out.println("Manufactures Samsung, Apple, Honor are not present on the page");
-        } catch (Exception e) {
-            System.out.println(e);
         }
+        System.out.println("Manufactures Samsung, Apple, Honor are not present on the page");
     }
 
     @Test
@@ -112,10 +109,9 @@ public class SearchMobilePhoneByFilters extends BaseTestRozetka {
         wait.until(presenceOfElementLocated(By.xpath("//a[@href='/mobile-phones/c80003/producer=samsung;38435=55375/']/label"))).click();
         Thread.sleep(3000);
 
-        List<WebElement> mobileRamSizeInTitle = driver.findElements(By.xpath("//*[contains(@class,'goods-tile__price-value')]"));
+        List<WebElement> mobileRamSizeInTitle = driver.findElements(By.cssSelector("span.goods-tile__title"));
         for (WebElement element : mobileRamSizeInTitle) {
             if (element.getText().contains("2/")) {
-                System.out.println("All filtered products have RAM size 2GB");
                 assertTrue(element.getText().contains("2/"), "Not all elements contain RAM size in title");
             }
         }
