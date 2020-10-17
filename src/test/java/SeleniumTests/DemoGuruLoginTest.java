@@ -24,7 +24,7 @@ public class DemoGuruLoginTest extends BaseUiTest {
         driver.findElement(By.name("uid")).sendKeys(login);
         driver.findElement(By.name("password")).sendKeys(password);
         driver.findElement(By.xpath("//input[@name='btnLogin']")).click();
-        driver.manage().window().fullscreen();
+        driver.manage().window().maximize();
         WebElement logoutButton = wait.until(presenceOfElementLocated(By.linkText("Log out")));
         logoutButton.click();
 
