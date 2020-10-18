@@ -12,7 +12,7 @@
             <class name="rozetka.SearchMobilePhoneByFilters"/>
             <class name="guru99.DragAndDropTest"/>
             <class name="guru99.CookiesTest"/>
-            <class name="guru99.IfamesTest"/>
+            <class name="guru99.IframesTest"/>
             <class name="guru99.GmailTest"/>
         </classes>
     </test>
