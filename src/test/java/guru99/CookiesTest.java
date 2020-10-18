@@ -10,6 +10,8 @@ import java.util.Iterator;
 import java.util.Set;
 
 import static org.testng.Assert.assertEquals;
+//Write automation test which handle cookies: Login to http://demo.guru99.com/Agile_Project/Agi_V1/index.php
+// Print out all cookies (all data); - Clear all cookies; - Refresh page, verify session of authorization still exists
 
 public class CookiesTest extends BaseUiTest {
 
