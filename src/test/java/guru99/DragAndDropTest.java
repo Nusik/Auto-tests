@@ -7,6 +7,8 @@ import org.openqa.selenium.interactions.Actions;
 import org.testng.annotations.Test;
 
 import static org.testng.Assert.assertTrue;
+//4. Write automation test for drag&drop: Navigate to http://demo.guru99.com/test/drag_drop.html
+//Drag and drop all possible webelements to their placeholders
 
 public class DragAndDropTest extends BaseUiTest {
 
