@@ -24,15 +24,19 @@ public class SearchMobilePhoneByFilters extends BaseTestRozetka {
         driver.get(url);
     }
 
-    @Test
-    public void searchMobileByManufacturerTest() throws InterruptedException {
-
-        driver.findElement(By.name("search")).sendKeys(searchText + Keys.ENTER);
-
+    public void openMenuMobilesBySearchText() {
         //Open page with "Samsung" product and select mobiles
-        By mobilesLink = By.xpath("//a[@class='categories-filter__link'][contains(@href,'mobile-phones/c80003/producer=samsung')]//span[contains(text(),'Мобильные телефоны')]");
-        wait.until(ExpectedConditions.presenceOfElementLocated(mobilesLink));
-        driver.findElement(mobilesLink).click();
+        By mobilesMenu = By.xpath("//a[@class='categories-filter__link'][contains(@href,'mobile-phones/c80003/producer=samsung')]//span[contains(text(),'Мобильные телефоны')]");
+        driver.findElement(By.name("search")).sendKeys(searchText + Keys.ENTER);
+        WebElement phones = (new WebDriverWait(driver, 3))
+                .until(ExpectedConditions.presenceOfElementLocated(mobilesMenu));
+        phones.click();
+    }
+
+    @Test
+    public void searchMobileByManufacturerTest() {
+
+        openMenuMobilesBySearchText();
 
         //Scroll to filter by manufacturer and add filter by Apple and Honor
         wait.until(presenceOfElementLocated(By.xpath("//div[@class='sidebar-block__inner']")));
@@ -60,16 +64,9 @@ public class SearchMobilePhoneByFilters extends BaseTestRozetka {
     }
 
     @Test
-    public void filterMobilesByPriceTest() throws InterruptedException {
+    public void filterMobilesByPriceTest() {
 
-        driver.findElement(By.name("search")).sendKeys(searchText + Keys.ENTER);
-
-        //Open page with "Samsung" product and select mobiles
-        By mobilesMenu = By.xpath("//a[@class='categories-filter__link'][contains(@href,'mobile-phones/c80003/producer=samsung')]//span[contains(text(),'Мобильные телефоны')]");
-        wait.until(ExpectedConditions.presenceOfElementLocated(mobilesMenu));
-        WebElement phones = (new WebDriverWait(driver, 3))
-                .until(ExpectedConditions.presenceOfElementLocated(mobilesMenu));
-        phones.click();
+        openMenuMobilesBySearchText();
 
         //Scroll to filter by price and add filter: 5000 < price < 15000
         wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@class='sidebar-block__inner']")));
@@ -105,16 +102,9 @@ public class SearchMobilePhoneByFilters extends BaseTestRozetka {
     }
 
     @Test
-    public void findRamSizeInTitleTest() throws InterruptedException {
+    public void findRamSizeInTitleTest() {
 
-        driver.findElement(By.name("search")).sendKeys(searchText + Keys.ENTER);
-
-        //open page with "Samsung" product and select mobiles
-        By mobilesMenu = By.xpath("//a[@class='categories-filter__link'][contains(@href,'mobile-phones/c80003/producer=samsung')]//span[contains(text(),'Мобильные телефоны')]");
-        wait.until(ExpectedConditions.presenceOfElementLocated(mobilesMenu));
-        WebElement phones = (new WebDriverWait(driver, 3))
-                .until(ExpectedConditions.presenceOfElementLocated(mobilesMenu));
-        phones.click();
+        openMenuMobilesBySearchText();
 
         //scroll to filter by Ram size and select 2GB
         wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@class='sidebar-block__inner']")));
