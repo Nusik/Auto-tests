@@ -20,8 +20,8 @@ public class GoogleSearchResultPageObject {
     }
 
     By statistics = By.cssSelector("#result-stats");
-    private By searchResultLinks = By.cssSelector("div cite");
-    private By nextButton = cssSelector("#pnnext");
+    By searchResultLinks = By.cssSelector("div cite");
+    By nextButton = cssSelector("#pnnext");
 
     public void waitForStatisticsAppear() {
         wait.until(presenceOfElementLocated(statistics));

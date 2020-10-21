@@ -9,8 +9,8 @@ import org.testng.annotations.BeforeClass;
 
 public class BaseTestRozetka {
 
-    WebDriver driver;
-    WebDriverWait wait;
+    protected WebDriver driver;
+    protected WebDriverWait wait;
 
     @BeforeClass
     public void setupDriver() {
