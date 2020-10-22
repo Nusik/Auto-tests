@@ -1,45 +1,50 @@
-package pagesRozetka;
+package pagesRozetka.RozetkaFactoryPages;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.List;
 
-import static org.openqa.selenium.support.ui.ExpectedConditions.presenceOfElementLocated;
-
-public class SearchResultPageObject {
+public class SearchResultPageFactory {
 
     WebDriver webDriver;
     WebDriverWait wait;
 
-    public SearchResultPageObject(WebDriver webDriver) {
+    public SearchResultPageFactory(WebDriver webDriver) {
         this.webDriver = webDriver;
-        this.wait = new WebDriverWait(webDriver, 3);
+        this.wait = new WebDriverWait(webDriver, 6);
+        PageFactory.initElements(webDriver, this);
     }
 
-    By mobilePhoneTitle = By.cssSelector("span.goods-tile__title");
-    By productPriceActual = By.xpath("//*[contains(@class,'goods-tile__price-value')]");
-    By priceList = By.cssSelector("div.goods-tile__prices");
-    By goodsPriceValue = By.cssSelector("span.goods-tile__price-value");
-    By goodsPicture = By.xpath("//a[@class='goods-tile__picture']");
+    @FindBy(css = "span.goods-tile__title")
+    private List<WebElement> mobilePhoneTitle;
+    @FindBy(xpath = "//*[contains(@class,'goods-tile__price-value')]")
+    private List<WebElement> productPriceActual;
+    @FindBy(css = "div.goods-tile__prices")
+    private List<WebElement> priceList;
+    @FindBy(css = "span.goods-tile__price-value")
+    private List<WebElement> goodsPriceValue;
+    @FindBy(xpath = "//a[@class='goods-tile__picture']")
+    private List<WebElement> goodsPicture;
 
     public void waitProductsTitle() {
-        wait.until(ExpectedConditions.presenceOfElementLocated(mobilePhoneTitle));
+        wait.until(ExpectedConditions.visibilityOfAllElements(mobilePhoneTitle));
     }
 
     public void waitProductPrice() {
-        wait.until(presenceOfElementLocated(priceList));
+        wait.until(ExpectedConditions.visibilityOfAllElements(priceList));
     }
 
     private List<WebElement> getAlMobileNamesFromTitle() {
-        return webDriver.findElements(mobilePhoneTitle);
+        return mobilePhoneTitle;
     }
 
     private List<WebElement> getAllPricesFromTitle() {
-        return webDriver.findElements(productPriceActual);
+        return productPriceActual;
     }
 
     public boolean comparePhoneNamesWithSelected(String productName1, String productName2, String productName3) throws Exception {
@@ -86,14 +91,14 @@ public class SearchResultPageObject {
     }
 
     public void findMonitor(String price) throws Exception {
-        List<WebElement> webList = webDriver.findElements(goodsPriceValue);
+        List<WebElement> webList = goodsPriceValue;
         for (int i = 0; i <= webList.size(); i++) {
             String monitorsListAll = webList.get(i).getText().replaceAll(" ", "");
             if (i == webList.size()) {
                 throw new Exception("There is no such monitor");
             }
             if (Integer.parseInt(price) > Integer.parseInt(monitorsListAll)) {
-                List<WebElement> monitorsListFiltered = webDriver.findElements(goodsPicture);
+                List<WebElement> monitorsListFiltered = goodsPicture;
                 monitorsListFiltered.get(i).click();
                 break;
             }

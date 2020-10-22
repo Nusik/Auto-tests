@@ -42,7 +42,6 @@ public class ProductPageObject {
 
     public String getCompareCounter() {
         return webDriver.findElement(compareButtonHeader).getText();
-//        return Integer.parseInt(webDriver.findElement(compareCounter).getText());
     }
 
     public String getProductName() {
