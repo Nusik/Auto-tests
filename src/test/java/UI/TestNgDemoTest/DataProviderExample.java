@@ -1,6 +1,6 @@
-package TestNgDemoTest;
+package UI.TestNgDemoTest;
 
-import TestNgDemoTest.dataProviders.DataProviderSource;
+import UI.TestNgDemoTest.dataProviders.DataProviderSource;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 

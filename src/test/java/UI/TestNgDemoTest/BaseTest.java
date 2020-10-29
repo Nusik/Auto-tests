@@ -1,4 +1,4 @@
-package TestNgDemoTest;
+package UI.TestNgDemoTest;
 
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.AfterSuite;

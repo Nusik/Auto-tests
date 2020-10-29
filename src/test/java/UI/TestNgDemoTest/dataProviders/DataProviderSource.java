@@ -1,4 +1,4 @@
-package TestNgDemoTest.dataProviders;
+package UI.TestNgDemoTest.dataProviders;
 
 import org.testng.annotations.DataProvider;
 

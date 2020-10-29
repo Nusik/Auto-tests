@@ -1,5 +1,6 @@
-package rozetka;
+package UI.rozetka;
 
+import UI.SeleniumTests.BaseUiTest;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
@@ -14,7 +15,7 @@ import java.util.List;
 import static org.openqa.selenium.support.ui.ExpectedConditions.presenceOfElementLocated;
 import static org.openqa.selenium.support.ui.ExpectedConditions.textToBePresentInElement;
 
-public class ComparisonOfMonitors extends BaseTestRozetka {
+public class ComparisonOfMonitors extends BaseUiTest {
 
     String url = "https://rozetka.com.ua/";
     String priceForSearch = "3000";

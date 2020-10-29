@@ -1,12 +1,12 @@
-package google;
+package UI.google;
 
-import SeleniumTests.BaseUiTest;
+import UI.SeleniumTests.BaseUiTest;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
-import pagesGoogle.GoogleSearchPageObject;
-import pagesGoogle.GoogleSearchResultPageObject;
+import pagesGoogle.factoryPages.GoogleSearchFactoryPage;
+import pagesGoogle.factoryPages.GoogleSearchResultFactoryPage;
 
-public class GoogleSearchPageObjectTest extends BaseUiTest {
+public class GoogleSearchFactoryPageTest extends BaseUiTest {
 
     String url = "https://google.com/ncr";
     String textForSearchResult = "iphone kyiv buy";
@@ -20,8 +20,8 @@ public class GoogleSearchPageObjectTest extends BaseUiTest {
 
     @Test
     public void searchLinkInResultCorrectTest() throws Exception {
-        GoogleSearchPageObject googleSearchPageObject = new GoogleSearchPageObject(driver);
-        GoogleSearchResultPageObject googleSearchResultPageObject = new GoogleSearchResultPageObject(driver);
+        GoogleSearchFactoryPage googleSearchPageObject = new GoogleSearchFactoryPage(driver);
+        GoogleSearchResultFactoryPage googleSearchResultPageObject = new GoogleSearchResultFactoryPage(driver);
 
         googleSearchPageObject.performSearchRequest(textForSearchResult);
         googleSearchResultPageObject.waitForStatisticsAppear();

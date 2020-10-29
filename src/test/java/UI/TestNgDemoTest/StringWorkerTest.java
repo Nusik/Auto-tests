@@ -1,9 +1,9 @@
-package TestNgDemoTest;
-
-import static org.testng.Assert.assertEquals;
+package UI.TestNgDemoTest;
 
 import TestNgDemoClasses.StringWorker;
 import org.testng.annotations.Test;
+
+import static org.testng.Assert.assertEquals;
 
 public class StringWorkerTest extends BaseTest {
 

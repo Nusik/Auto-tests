@@ -1,4 +1,4 @@
-package SeleniumTests;
+package UI.SeleniumTests;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;

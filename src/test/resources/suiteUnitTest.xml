@@ -4,8 +4,8 @@
   <parameter name="one" value="Test two parameter"/>
   <test name="Main test">
     <classes>
-      <class name="TestNgDemoTest.CalculatorTest"/>
-      <class name="TestNgDemoTest.StringWorkerTest"/>
+      <class name="UI.TestNgDemoTest.CalculatorTest"/>
+      <class name="UI.TestNgDemoTest.StringWorkerTest"/>
     </classes>
   </test>
 </suite>

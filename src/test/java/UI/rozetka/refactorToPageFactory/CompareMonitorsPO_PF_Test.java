@@ -1,14 +1,15 @@
-package rozetka.refactorToPageObject;
+package UI.rozetka.refactorToPageFactory;
 
+import UI.rozetka.BaseTestRozetka;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
-import pagesRozetka.*;
-import rozetka.BaseTestRozetka;
+import pagesRozetka.RozetkaFactoryPages.ComparisonFactoryPage;
+import pagesRozetka.RozetkaFactoryPages.MainPageFactory;
+import pagesRozetka.RozetkaFactoryPages.ProductPageFactory;
+import pagesRozetka.RozetkaFactoryPages.SearchResultPageFactory;
 
-import static org.openqa.selenium.support.ui.ExpectedConditions.textToBePresentInElement;
-
-public class CompareMonitorsPOTest extends BaseTestRozetka {
+public class CompareMonitorsPO_PF_Test extends BaseTestRozetka {
 
     String url = "https://rozetka.com.ua/";
     String priceForSearch = "3000";
@@ -20,10 +21,10 @@ public class CompareMonitorsPOTest extends BaseTestRozetka {
 
     @Test
     public void comparisonOfMonitorsTest() throws Exception {
-        MainPageObject mainPage = new MainPageObject(driver);
-        SearchResultPageObject searchResultPage = new SearchResultPageObject(driver);
-        ProductPageObject productPage = new ProductPageObject(driver);
-        ComparisonPage comparisonPage = new ComparisonPage(driver);
+        MainPageFactory mainPage = new MainPageFactory(driver);
+        SearchResultPageFactory searchResultPage = new SearchResultPageFactory(driver);
+        ProductPageFactory productPage = new ProductPageFactory(driver);
+        ComparisonFactoryPage comparisonPage = new ComparisonFactoryPage(driver);
 
         //1. Hover menu with laptops and then with monitors and open the last one
         mainPage.hoverMenu();

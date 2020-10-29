@@ -1,9 +1,9 @@
-package TestNgDemoTest;
-
-import static org.testng.Assert.assertEquals;
+package UI.TestNgDemoTest;
 
 import TestNgDemoClasses.Calculator;
 import org.testng.annotations.Test;
+
+import static org.testng.Assert.assertEquals;
 
 
 

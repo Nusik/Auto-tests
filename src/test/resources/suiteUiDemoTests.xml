@@ -4,16 +4,16 @@
     <parameter name="one" value="Tests"/>
     <test name="Main test">
         <classes>
-            <class name="SeleniumTests.DemoGuruLoginTest"/>
-            <class name="SeleniumTests.GoogleSearchTest"/>
-            <class name="google.GoogleSearchFactoryPageTest"/>
-            <class name="rozetka.ComparisonOfMonitors"/>
-            <class name="rozetka.RozetkaBusketTest"/>
-            <class name="rozetka.SearchMobilePhoneByFilters"/>
-            <class name="guru99.DragAndDropTest"/>
-            <class name="guru99.CookiesTest"/>
-            <class name="guru99.IframesTest"/>
-            <class name="guru99.GmailTest"/>
+            <class name="UI.SeleniumTests.DemoGuruLoginTest"/>
+            <class name="UI.SeleniumTests.GoogleSearchTest"/>
+            <class name="UI.google.GoogleSearchFactoryPageTest"/>
+            <class name="UI.rozetka.ComparisonOfMonitors"/>
+            <class name="UI.rozetka.RozetkaBusketTest"/>
+            <class name="UI.rozetka.SearchMobilePhoneByFilters"/>
+            <class name="UI.guru99.DragAndDropTest"/>
+            <class name="UI.guru99.CookiesTest"/>
+            <class name="UI.guru99.IframesTest"/>
+            <class name="UI.guru99.GmailTest"/>
         </classes>
     </test>
 </suite>

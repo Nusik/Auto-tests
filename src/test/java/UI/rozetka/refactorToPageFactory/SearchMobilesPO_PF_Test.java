@@ -1,15 +1,15 @@
-package rozetka.refactorToPageObject;
+package UI.rozetka.refactorToPageFactory;
 
+import UI.rozetka.BaseTestRozetka;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
-import pagesRozetka.MainPageObject;
-import pagesRozetka.SearchResultPageObject;
-import pagesRozetka.SidebarInResultPageObject;
-import rozetka.BaseTestRozetka;
+import pagesRozetka.RozetkaFactoryPages.MainPageFactory;
+import pagesRozetka.RozetkaFactoryPages.SearchResultPageFactory;
+import pagesRozetka.RozetkaFactoryPages.SidebarInResultPageFactory;
 
 import static org.testng.Assert.assertTrue;
 
-public class SearchMobilesPOTest extends BaseTestRozetka {
+public class SearchMobilesPO_PF_Test extends BaseTestRozetka {
 
     String url = "https://rozetka.com.ua/";
     String searchText = "samsung";
@@ -25,9 +25,9 @@ public class SearchMobilesPOTest extends BaseTestRozetka {
         String productName2 = "Apple";
         String productName3 = "Huawei";
 
-        MainPageObject mainPageObject = new MainPageObject(driver);
-        SidebarInResultPageObject sidebarInResultPageObject = new SidebarInResultPageObject(driver);
-        SearchResultPageObject searchResultPageObject = new SearchResultPageObject(driver);
+        MainPageFactory mainPageObject = new MainPageFactory(driver);
+        SidebarInResultPageFactory sidebarInResultPageObject = new SidebarInResultPageFactory(driver);
+        SearchResultPageFactory searchResultPageObject = new SearchResultPageFactory(driver);
 
         //Open page with "Samsung" product and select mobiles
         mainPageObject.openMenuMobilesBySearchText(searchText);
@@ -50,9 +50,9 @@ public class SearchMobilesPOTest extends BaseTestRozetka {
         int maxProductPrice = 15000;
         int minProductPrice = 5000;
 
-        MainPageObject mainPageObject = new MainPageObject(driver);
-        SidebarInResultPageObject sidebarInResultPageObject = new SidebarInResultPageObject(driver);
-        SearchResultPageObject searchResultPageObject = new SearchResultPageObject(driver);
+        MainPageFactory mainPageObject = new MainPageFactory(driver);
+        SidebarInResultPageFactory sidebarInResultPageObject = new SidebarInResultPageFactory(driver);
+        SearchResultPageFactory searchResultPageObject = new SearchResultPageFactory(driver);
 
         //Open page with "Samsung" product and select mobiles
         mainPageObject.openMenuMobilesBySearchText(searchText);
@@ -73,12 +73,12 @@ public class SearchMobilesPOTest extends BaseTestRozetka {
     @Test
     public void findRamSizeInTitleTest() throws Exception {
         String ramSize = "2/";
-        MainPageObject mainPageObject = new MainPageObject(driver);
-        SidebarInResultPageObject sidebarInResultPageObject = new SidebarInResultPageObject(driver);
-        SearchResultPageObject searchResultPageObject = new SearchResultPageObject(driver);
+        MainPageFactory mainPage = new MainPageFactory(driver);
+        SidebarInResultPageFactory sidebarInResultPageObject = new SidebarInResultPageFactory(driver);
+        SearchResultPageFactory searchResultPageObject = new SearchResultPageFactory(driver);
 
         //Open page with "Samsung" product and select mobiles
-        mainPageObject.openMenuMobilesBySearchText(searchText);
+        mainPage.openMenuMobilesBySearchText(searchText);
 
         //scroll to filter by Ram size and select 2GB
         sidebarInResultPageObject.waitSidebarAppear();

@@ -1,6 +1,6 @@
-package guru99;
+package UI.guru99;
 
-import SeleniumTests.BaseUiTest;
+import UI.SeleniumTests.BaseUiTest;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
@@ -16,7 +16,7 @@ import java.awt.event.KeyEvent;
 import static org.testng.Assert.assertTrue;
 
 //1. Write automation test for mail.goolge.com:
-//- Login to mail.google.com with existing account;
+//- Login to mail.UI.google.com with existing account;
 //- Create new email (with TO=*the same email*, subject, email text), attach file from your local machine, click send;
 //- Go to inbox, verify email came, verify subject, content of email, verify file is attached
 

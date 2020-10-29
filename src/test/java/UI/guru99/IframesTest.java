@@ -1,6 +1,6 @@
-package guru99;
+package UI.guru99;
 
-import SeleniumTests.BaseUiTest;
+import UI.SeleniumTests.BaseUiTest;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
