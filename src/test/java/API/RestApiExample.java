@@ -36,16 +36,18 @@ public class RestApiExample {
     }
 
     @Test
-    public void negativeAllEmployeesWrongIdTest() {
-        given().log().all()
+    public void getAllEmployeesTestNegative() {
+        //try to get all employees data from wrong endpoint
+        String endpoint = "employee";            // correct is "employees"
+        String url = mainUrl + endpoint;
+        given()
                 .when()
-                .get("/employees")
+                .get(url)
                 .then()
                 .log().all()
-                .statusCode(200)
+                .statusCode(404)
                 .assertThat()
-                .body("status", equalTo("success"))
-                .body("data.id", hasItems("-1"));
+                .body("message", equalTo("Error Occured! Page Not found, contact rstapi2example@gmail.com"));
     }
 
     @Test
@@ -65,19 +67,19 @@ public class RestApiExample {
     }
 
     @Test
-    public void negativeGetEmployeeByIdWrongDataTest() {
-        Employee expectedEmployee = new Employee("Tiger", 32000, 61, "");
-        EmployeeResponse expectedResponse = new EmployeeResponse("success", expectedEmployee, "Successfully! Record has been fetched.");
-        EmployeeResponse response = given()
+    public void getEmployeeIdTestNegative() {
+        //try to get employee data by wrong endpoint
+        String endpoint = "employeee/";
+        String id = "id";
+        String url = mainUrl + endpoint + id;
+        given()
                 .when()
-                .get("/employee/1")
+                .get(url)
                 .then()
                 .log().all()
-                .statusCode(200)
-                .extract()
-                .as(EmployeeResponse.class);
-
-        assertEquals(response, expectedResponse);
+                .statusCode(404)
+                .assertThat()
+                .body("message", equalTo("Error Occured! Page Not found, contact rstapi2example@gmail.com"));
     }
 
     @Test
@@ -99,21 +101,19 @@ public class RestApiExample {
     }
 
     @Test
-    public void negativePostEmployeeStatusCodeTest() {
-        PostEmployeeModel employee = new PostEmployeeModel("Test", "990099", "12");
-        EmployeeResponse expectedResponse = new EmployeeResponse("success", new Employee(), "Successfully! Record has been fetched.");
+    public void postEmployeeTestNegative() {
+        //try wrong method
+        String endpoint = "create";
+        String url = mainUrl + endpoint;
+        PostEmployee employee = new PostEmployee("Thomas", "675432", "43");
 
-        EmployeeResponse response = given()
+        given()
                 .with()
                 .body(employee)
-                .get("/create")
+                .put(url)
                 .then()
                 .log().all()
-                .statusCode(500)
-                .extract()
-                .as(EmployeeResponse.class);
-
-        assertEquals(response, expectedResponse);
+                .statusCode(405);
     }
 
     @Test
@@ -131,17 +131,17 @@ public class RestApiExample {
     }
 
     @Test
-    public void negativeDeleteEmployeeIdTest() {
-        Employee employee = new Employee(-2);
-        EmployeeResponse expectedResponse = new EmployeeResponse("success", employee, "Successfully! Record has been fetched.");
-        EmployeeResponse response = given()
-                .delete("/delete/" + employee)
+    public void deleteEmployeeTestNegative() {
+        //try wrong method
+        String endpoint = "delete/";
+        String id = "id";
+        String url = mainUrl + endpoint + id;
+
+        given()
+                .when()
+                .post(url)
                 .then()
-                .log().all()
-                .statusCode(200)
-                .extract()
-                .as(EmployeeResponse.class);
-        assertEquals(response, expectedResponse);
+                .statusCode(405);
     }
 
     @Test
@@ -165,21 +165,20 @@ public class RestApiExample {
         assertEquals(response, expectedResponse);
     }
 
-    @Test
-    public void negativePutStringInEmployeeIdTest() {
-        Map<String, String> request = new HashMap<>();
-        request.put("id", "Test");
-        EmployeeResponse expectedResponse = new EmployeeResponse("success", new Employee(), "Successfully! Record has been fetched.");
-        EmployeeResponse response = given()
+   @Test
+    public void putEmployeeTestNegative() {
+        //try wrong method
+        String endpoint = "update/";
+        String id = "id";
+        String url = mainUrl + endpoint + id;
+        PostEmployee employee = new PostEmployee("Thomas", "675432", "43");
+
+        given()
                 .with()
-                .body(request)
-                .put("/update/21")
+                .body(employee)
+                .post(url)
                 .then()
                 .log().all()
-                .statusCode(200)
-                .extract()
-                .as(EmployeeResponse.class);
-        assertEquals(response, expectedResponse);
+                .statusCode(405);
     }
-
 }
